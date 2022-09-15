@@ -1,19 +1,23 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\IngredientPizzaController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::post('pizzas', [PizzaController::class, 'store']);
+Route::patch('pizzas/{pizza}', [PizzaController::class, 'update']);
+Route::get('pizzas', [PizzaController::class, 'index']);
+Route::get('pizzas/{pizza}', [PizzaController::class, 'show']);
+Route::delete('pizzas/{pizza}', [PizzaController::class, 'destroy']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::post('ingredients', [IngredientController::class, 'store']);
+Route::patch('ingredients/{ingredient}', [IngredientController::class, 'update']);
+Route::get('ingredients', [IngredientController::class, 'index']);
+Route::get('ingredients/{ingredient}', [IngredientController::class, 'show']);
+Route::delete('ingredients/{ingredient}', [IngredientController::class, 'destroy']);
+
+Route::post('ingredient-pizza', [IngredientPizzaController::class, 'store']);
+Route::patch('ingredient-pizza/{ingredientPizza}', [IngredientPizzaController::class, 'update']);
+Route::delete('ingredient-pizza/{ingredientPizza}', [IngredientPizzaController::class, 'destroy']);
