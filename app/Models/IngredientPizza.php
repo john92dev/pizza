@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class IngredientPizza extends Model
 {
@@ -17,7 +18,21 @@ class IngredientPizza extends Model
         'order',
     ];
 
-    public function ingredient() {
-        return $this->belongsTo(Ingredient::class);
+    public function pizza(): BelongsTo
+    {
+        return $this->belongsTo(Pizza::class);
+    }
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::deleted(function ($model) {
+            $model->pizza->recalculatePrice();
+        });
+
+        static::created(function ($model) {
+            $model->pizza->recalculatePrice();
+        });
     }
 }

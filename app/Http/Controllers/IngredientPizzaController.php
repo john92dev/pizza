@@ -8,13 +8,14 @@ use App\Models\IngredientPizza;
 
 class IngredientPizzaController extends Controller
 {
-    public function store(StoreIngredientPizza $request) {
+    public function store(StoreIngredientPizza $request): IngredientPizza
+    {
         $data = $request->validated();
 
         return IngredientPizza::create($data);
     }
 
-    public function update(UpdateIngredientPizza $request, IngredientPizza $ingredientPizza)
+    public function update(UpdateIngredientPizza $request, IngredientPizza $ingredientPizza): IngredientPizza
     {
         $data = $request->validated();
 
@@ -23,7 +24,8 @@ class IngredientPizzaController extends Controller
         return $ingredientPizza;
     }
 
-    public function destroy(IngredientPizza $ingredientPizza) {
+    public function destroy(IngredientPizza $ingredientPizza): void
+    {
         $ingredientPizza->delete();
     }
 }

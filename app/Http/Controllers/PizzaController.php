@@ -8,13 +8,15 @@ use App\Models\Pizza;
 
 class PizzaController extends Controller
 {
-    public function store(StorePizza $request) {
+    public function store(StorePizza $request): Pizza
+    {
         $data = $request->validated();
 
         return Pizza::create($data);
     }
 
-    public function update(UpdatePizza $request, Pizza $pizza) {
+    public function update(UpdatePizza $request, Pizza $pizza): Pizza
+    {
         $data = $request->validated();
         $pizza->update($data);
 
@@ -23,15 +25,16 @@ class PizzaController extends Controller
 
     public function index()
     {
-        return Pizza::get();
+        return Pizza::orderBy('name')->get();
     }
 
-    public function show(Pizza $pizza)
+    public function show(Pizza $pizza): Pizza
     {
         return $pizza->load('ingredients');
     }
 
-    public function destroy(Pizza $pizza) {
+    public function destroy(Pizza $pizza): void
+    {
         $pizza->delete();
     }
 }

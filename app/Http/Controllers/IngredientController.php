@@ -8,14 +8,14 @@ use App\Models\Ingredient;
 
 class IngredientController extends Controller
 {
-    public function store(StoreIngredient $request)
+    public function store(StoreIngredient $request): Ingredient
     {
         $data = $request->validated();
 
         return Ingredient::create($data);
     }
 
-    public function update(UpdateIngredient $request, Ingredient $ingredient)
+    public function update(UpdateIngredient $request, Ingredient $ingredient): Ingredient
     {
         $data = $request->validated();
         $ingredient->update($data);
@@ -28,12 +28,12 @@ class IngredientController extends Controller
         return Ingredient::get();
     }
 
-    public function show(Ingredient $ingredient)
+    public function show(Ingredient $ingredient): Ingredient
     {
         return $ingredient;
     }
 
-    public function destroy(Ingredient $ingredient)
+    public function destroy(Ingredient $ingredient): void
     {
         $ingredient->delete();
     }
